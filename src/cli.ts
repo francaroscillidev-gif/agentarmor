@@ -12,6 +12,7 @@ import { McpProxy } from './mcp-proxy.js';
 import { InjectionDetector } from './injection.js';
 import { AuditLogger } from './audit.js';
 import { CircuitBreaker } from './circuit-breaker.js';
+import { startDashboardServer } from './dashboard.js';
 
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
@@ -138,6 +139,13 @@ switch (command) {
     break;
   }
 
+  case 'dashboard': {
+    printBanner();
+    const port = Number(args[1]) || 3456;
+    startDashboardServer(port);
+    break;
+  }
+
   case 'help':
   default:
     printBanner();
@@ -147,6 +155,7 @@ Commands:
   check-cmd <command>      Evaluate shell command against security policies
   check-prompt <text>      Detect prompt injections, persona hijacks and jailbreaks
   redact <text>            Run DLP scanner & mask secrets (OpenAI, AWS, GitHub keys)
+  dashboard [port]         Start local real-time security operations dashboard UI
   checkpoint [desc]        Create an instant git-backed safety restore point
   rollback                 Instantly revert any damage made by an agent
   proxy-mcp                Run MCP transparent zero-trust proxy
