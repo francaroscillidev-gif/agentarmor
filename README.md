@@ -106,5 +106,16 @@ Created and architected by **Franca Roscilli**
 
 ---
 
+## 📬 Contact & Support
+
+Need help integrating AgentArmor, reporting a vulnerability, or discussing enterprise features? We are here to support you!
+
+- 🐛 **Issue Tracker & Bug Reports:** [Open an Issue on GitHub](https://github.com/francaroscillidev-gif/agentarmor/issues)
+- 💡 **Feature Requests & Ideas:** [Start a Discussion](https://github.com/francaroscillidev-gif/agentarmor/discussions)
+- ✉️ **Direct Email Support:** [francaroscillidev@gmail.com](mailto:francaroscillidev@gmail.com)
+- 🔒 **Responsible Security Disclosure:** To report a sensitive security vulnerability, please email directly with the subject line `[SECURITY] AgentArmor Vulnerability`.
+
+---
+
 ## 🤝 Contributing & License
 Distributed under the Apache-2.0 License. Copyright © 2026 Franca Roscilli.
