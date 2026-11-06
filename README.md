@@ -2,8 +2,10 @@
 
 **The Zero-Trust Security Gateway & Deterministic Sandbox for AI Agents & MCP Tools.**
 
+[![Author](https://img.shields.io/badge/Author-Franca%20Roscilli-blue.svg)](https://github.com/francaroscillidev-gif)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-francaroscillidev--gif%2Fagentarmor-181717?logo=github)](https://github.com/francaroscillidev-gif/agentarmor)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/francaroscillidev-gif/agentarmor/pulls)
 
 ---
 
@@ -88,5 +90,14 @@ node dist/cli.js rollback
 
 ---
 
+## 👤 Author & Creator
+
+Created and architected by **Franca Roscilli**  
+- **GitHub:** [@francaroscillidev-gif](https://github.com/francaroscillidev-gif)  
+- **Email:** francaroscillidev@gmail.com  
+- **Repository:** [https://github.com/francaroscillidev-gif/agentarmor](https://github.com/francaroscillidev-gif/agentarmor)
+
+---
+
 ## 🤝 Contributing & License
-Distributed under the Apache-2.0 License. Contributions are welcome!
+Distributed under the Apache-2.0 License. Copyright © 2026 Franca Roscilli.

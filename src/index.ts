@@ -8,3 +8,5 @@ export * from './audit.js';
 export * from './circuit-breaker.js';
 export * from './dashboard.js';
 export * from './network.js';
+export * from './docker-sandbox.js';
+export * from './approval.js';

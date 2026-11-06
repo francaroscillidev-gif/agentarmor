@@ -23,7 +23,15 @@
     "llm",
     "dlp"
   ],
-  "author": "AgentArmor Community",
+  "author": "Franca Roscilli <francaroscillidev@gmail.com> (https://github.com/francaroscillidev-gif)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/francaroscillidev-gif/agentarmor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/francaroscillidev-gif/agentarmor/issues"
+  },
+  "homepage": "https://github.com/francaroscillidev-gif/agentarmor#readme",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^22.0.0",
