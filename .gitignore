@@ -3,3 +3,9 @@ dist/
 .agentarmor_audit.jsonl
 *.log
 .DS_Store
+
+# Aggiunti automaticamente da push-to-github
+.env
+.env.local
+build
+.push-to-github
