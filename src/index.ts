@@ -13,3 +13,6 @@ export * from './approval.js';
 export * from './semantic-classifier.js';
 export * from './honeypot.js';
 export * from './report-generator.js';
+export * from './alerts.js';
+export * from './sql-guard.js';
+export * from './simulator.js';

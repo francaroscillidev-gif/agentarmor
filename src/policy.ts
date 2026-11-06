@@ -21,6 +21,10 @@ export const DEFAULT_BLOCKED_COMMAND_PATTERNS: RegExp[] = [
 ];
 
 export const DEFAULT_PROTECTED_PATHS: string[] = [
+  '.ssh',
+  '.gnupg',
+  '.aws',
+  '.kube',
   path.join(os.homedir(), '.ssh'),
   path.join(os.homedir(), '.gnupg'),
   path.join(os.homedir(), '.aws'),

@@ -13,6 +13,8 @@ import { InjectionDetector } from './injection.js';
 import { AuditLogger } from './audit.js';
 import { CircuitBreaker } from './circuit-breaker.js';
 import { startDashboardServer } from './dashboard.js';
+import { SecuritySimulator } from './simulator.js';
+import { SqlGuard } from './sql-guard.js';
 
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
@@ -139,6 +141,35 @@ switch (command) {
     break;
   }
 
+  case 'benchmark': {
+    printBanner();
+    console.log('⚡ Running Automated Adversarial Security Benchmark...\n');
+    const sim = new SecuritySimulator();
+    const res = sim.runBenchmark();
+    for (const r of res.results) {
+      console.log(`[${r.id}] ${r.category}: "${r.payload}" -> ${r.blocked ? '🛑 BLOCKED' : '✅ ALLOWED'} (${r.success ? 'PASSED' : 'FAILED'})`);
+    }
+    console.log(`\nFinal Score: ${res.passed}/${res.total} Scenarios Passed (${((res.passed/res.total)*100).toFixed(0)}%)`);
+    break;
+  }
+
+  case 'check-sql': {
+    const sql = args.slice(1).join(' ');
+    if (!sql) {
+      console.error('Error: specify a SQL query to evaluate. E.g.: agentarmor check-sql "DROP TABLE users;"');
+      process.exit(1);
+    }
+    const guard = new SqlGuard();
+    const result = guard.evaluateQuery(sql);
+    console.log(`Query: "${sql}"`);
+    console.log(`Status: ${result.allowed ? '✅ ALLOWED' : '❌ BLOCKED'}`);
+    if (!result.allowed) {
+      console.log(`Reason: ${result.reason}`);
+      process.exit(2);
+    }
+    break;
+  }
+
   case 'dashboard': {
     printBanner();
     const port = Number(args[1]) || 3456;
@@ -154,6 +185,8 @@ switch (command) {
 Commands:
   check-cmd <command>      Evaluate shell command against security policies
   check-prompt <text>      Detect prompt injections, persona hijacks and jailbreaks
+  check-sql <query>        Evaluate SQL query against injection and data deletion
+  benchmark                Run automated adversarial attack simulator suite
   redact <text>            Run DLP scanner & mask secrets (OpenAI, AWS, GitHub keys)
   dashboard [port]         Start local real-time security operations dashboard UI
   checkpoint [desc]        Create an instant git-backed safety restore point

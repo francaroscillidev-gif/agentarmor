@@ -8,6 +8,9 @@ import { CircuitBreaker } from '../circuit-breaker.js';
 import { SemanticInjectionClassifier } from '../semantic-classifier.js';
 import { HoneypotEngine } from '../honeypot.js';
 import { ReportGenerator } from '../report-generator.js';
+import { SqlGuard } from '../sql-guard.js';
+import { SecuritySimulator } from '../simulator.js';
+import { WebhookDispatcher } from '../alerts.js';
 
 test('PolicyEngine blocks rm -rf / and dangerous commands', () => {
   const policy = new PolicyEngine();
@@ -86,4 +89,23 @@ test('ReportGenerator outputs valid SARIF standard JSON', () => {
   const parsed = JSON.parse(sarif);
   assert.strictEqual(parsed.version, '2.1.0');
   assert.strictEqual(parsed.runs[0].results.length, 1);
+});
+
+test('SqlGuard blocks DROP TABLE and SQL injections', () => {
+  const guard = new SqlGuard();
+  const res1 = guard.evaluateQuery('DROP TABLE users;');
+  assert.strictEqual(res1.allowed, false);
+  assert.strictEqual(res1.isDestructive, true);
+
+  const res2 = guard.evaluateQuery("SELECT * FROM users WHERE email = 'test' OR 1=1 --");
+  assert.strictEqual(res2.allowed, false);
+
+  const res3 = guard.evaluateQuery('SELECT id, name FROM products WHERE id = 42;');
+  assert.strictEqual(res3.allowed, true);
+});
+
+test('SecuritySimulator executes full automated attack benchmark with 100% pass', () => {
+  const sim = new SecuritySimulator();
+  const bench = sim.runBenchmark();
+  assert.strictEqual(bench.passed, bench.total);
 });

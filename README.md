@@ -25,6 +25,9 @@ This exposes developers and companies to **3 critical risks**:
 ## ⚡ Quick Features
 
 - **🛡️ Deterministic AST & Command Policy Engine:** Detects and blocks malicious shell patterns (`rm -rf`, `curl | bash`, fork bombs) and unauthorized access to paths like `~/.ssh`, `~/.aws`, `.env`.
+- **🗄️ SQL Injection & Catastrophic DDL Guard:** Intercepts `DROP TABLE`, `TRUNCATE`, `OR 1=1` and privilege escalation before touching database tools.
+- **⚡ Automated Adversarial Benchmark Simulator:** Built-in testbed (`agentarmor benchmark`) verifying zero-trust defenses across canonical attack vectors.
+- **🚨 Multi-Channel Alert Dispatcher:** Instant webhook alerting for Discord, Slack, and SIEM pipelines upon high-risk incidents.
 - **🧠 Semantic Vector Injection Classifier:** Mathematical cosine similarity classifier comparing input semantics with high-entropy adversarial attack profiles.
 - **🍯 Canary Honeypot & Deception Lures:** Plants synthetic decoy secrets (`AKIA_CANARY...`) to catch rogue exfiltration attempts with zero false positives.
 - **🔒 Inbound & Outbound DLP (Data Loss Prevention):** Automatically intercepts and redacts API keys, credentials, and private keys from prompts and tool execution results.
