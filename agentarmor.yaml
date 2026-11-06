@@ -1,0 +1,55 @@
+# AgentArmor Security Policy Configuration
+# Place in ~/.agentarmor.yaml or in your project root
+
+version: "1.0"
+mode: "enforce" # "enforce" | "audit-only" | "disabled"
+
+# Path access restrictions
+filesystem:
+  protected_paths:
+    - "~/.ssh"
+    - "~/.aws"
+    - "~/.kube"
+    - "~/.gnupg"
+    - ".env*"
+    - "/etc/shadow"
+    - "/etc/passwd"
+  read_only_paths:
+    - "/usr"
+    - "/bin"
+    - "/sbin"
+
+# Shell command restrictions
+execution:
+  blocked_commands:
+    - "rm -rf /"
+    - "mkfs"
+    - "shutdown"
+    - "reboot"
+  block_curl_piping: true
+  prevent_fork_bombs: true
+
+# Outbound Egress / SSRF controls
+network:
+  enforce_whitelist: true
+  allowed_domains:
+    - "github.com"
+    - "api.github.com"
+    - "registry.npmjs.org"
+    - "pypi.org"
+    - "crates.io"
+  block_cloud_metadata: true # Blocks 169.254.169.254
+  block_private_ips: true    # Blocks 127.0.0.1, 192.168.x.x, 10.x.x.x
+
+# Data Loss Prevention
+dlp:
+  enabled: true
+  redact_openai_keys: true
+  redact_anthropic_keys: true
+  redact_aws_keys: true
+  redact_private_keys: true
+
+# Safety Snapshot
+sandbox:
+  git_auto_checkpoint: true
+  max_snapshots: 20

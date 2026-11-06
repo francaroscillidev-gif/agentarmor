@@ -7,3 +7,4 @@ export * from './injection.js';
 export * from './audit.js';
 export * from './circuit-breaker.js';
 export * from './dashboard.js';
+export * from './network.js';
