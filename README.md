@@ -25,7 +25,11 @@ This exposes developers and companies to **3 critical risks**:
 ## ⚡ Quick Features
 
 - **🛡️ Deterministic AST & Command Policy Engine:** Detects and blocks malicious shell patterns (`rm -rf`, `curl | bash`, fork bombs) and unauthorized access to paths like `~/.ssh`, `~/.aws`, `.env`.
+- **🧠 Semantic Vector Injection Classifier:** Mathematical cosine similarity classifier comparing input semantics with high-entropy adversarial attack profiles.
+- **🍯 Canary Honeypot & Deception Lures:** Plants synthetic decoy secrets (`AKIA_CANARY...`) to catch rogue exfiltration attempts with zero false positives.
 - **🔒 Inbound & Outbound DLP (Data Loss Prevention):** Automatically intercepts and redacts API keys, credentials, and private keys from prompts and tool execution results.
+- **🌐 Network Egress & SSRF Protection:** Blocks AWS/GCP metadata (`169.254.169.254`), private IP probing, and unwhitelisted outbound C2 connections.
+- **📊 Security Reports & GitHub SARIF:** Generates OASIS SARIF v2.1.0 standard files for GitHub Code Scanning and enterprise compliance.
 - **🔄 Git-Backed Safety Checkpoints & Instant Rollback:** Snapshots workspace state before an agent starts working, allowing 1-click rollback (`agentarmor rollback`) if anything goes wrong.
 - **🔌 Native MCP (Model Context Protocol) Support:** Acts as a transparent proxy for MCP stdio traffic, evaluating tool calls in real time.
 

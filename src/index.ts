@@ -10,3 +10,6 @@ export * from './dashboard.js';
 export * from './network.js';
 export * from './docker-sandbox.js';
 export * from './approval.js';
+export * from './semantic-classifier.js';
+export * from './honeypot.js';
+export * from './report-generator.js';
