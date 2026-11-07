@@ -24,7 +24,9 @@ This exposes developers and companies to **3 critical risks**:
 
 ## ⚡ Quick Features
 
-- **🛡️ Deterministic AST & Command Policy Engine:** Detects and blocks malicious shell patterns (`rm -rf`, `curl | bash`, fork bombs) and unauthorized access to paths like `~/.ssh`, `~/.aws`, `.env`.
+- **🛡️ AST-Level Bash Deconstruction & Anti-Evasion Engine:** Parses syntax trees to defeat obfuscation (Base64 pipelines `echo ... | base64 -d | sh`, `$IFS` tricks, hex encoding, subshells `$()`, quote stripping).
+- **👥 Multi-Tenant Role-Based Access Control (RBAC):** Assigns fine-grained privilege tiers (`viewer`, `researcher`, `developer`, `devops`, `admin`) to distinct autonomous agents.
+- **👁️ Real-Time File System Integrity Monitor:** Active filesystem watching alerting or triggering instant rollback if `.env` or configuration files are tampered with.
 - **🗄️ SQL Injection & Catastrophic DDL Guard:** Intercepts `DROP TABLE`, `TRUNCATE`, `OR 1=1` and privilege escalation before touching database tools.
 - **⚡ Automated Adversarial Benchmark Simulator:** Built-in testbed (`agentarmor benchmark`) verifying zero-trust defenses across canonical attack vectors.
 - **🚨 Multi-Channel Alert Dispatcher:** Instant webhook alerting for Discord, Slack, and SIEM pipelines upon high-risk incidents.

@@ -6,6 +6,7 @@
 import path from 'node:path';
 import os from 'node:os';
 import { ArmorConfig, SecurityEvaluation, SecurityViolation } from './types.js';
+import { AstBashParser } from './ast-parser.js';
 
 export const DEFAULT_BLOCKED_COMMAND_PATTERNS: RegExp[] = [
   /\brm\s+(?:-[a-zA-Z]*r[a-zA-Z]*f?|--recursive)\s+[\/\~]/i, // rm -rf / or ~
@@ -42,6 +43,7 @@ export class PolicyEngine {
   private config: ArmorConfig;
   private blockedPatterns: RegExp[];
   private protectedPaths: string[];
+  private astParser = new AstBashParser();
 
   constructor(config: ArmorConfig = {}) {
     this.config = config;
@@ -50,36 +52,52 @@ export class PolicyEngine {
   }
 
   /**
-   * Evaluates a shell command string.
+   * Evaluates a shell command string using AST normalization and deobfuscation.
    */
   public evaluateCommand(cmd: string): SecurityEvaluation {
     const violations: SecurityViolation[] = [];
 
-    // 1. Check for destructive command patterns
-    for (const pattern of this.blockedPatterns) {
-      if (pattern.test(cmd)) {
-        violations.push({
-          code: 'ERR_DANGEROUS_COMMAND',
-          message: `Command matches high-risk destructive signature: ${pattern.toString()}`,
-          severity: 'critical',
-          matchedRule: pattern.toString(),
-          target: cmd
-        });
-      }
+    // 0. Parse & Deobfuscate AST
+    const parsed = this.astParser.parse(cmd);
+    const commandsToInspect = [cmd, parsed.normalized, ...parsed.chainedCommands, ...parsed.subshells];
+
+    if (parsed.isObfuscated) {
+      violations.push({
+        code: 'WARN_OBFUSCATED_COMMAND',
+        message: `Command contains evasion/obfuscation techniques (${parsed.detectedObfuscationType})`,
+        severity: 'high',
+        matchedRule: parsed.detectedObfuscationType || 'Obfuscation',
+        target: cmd
+      });
     }
 
-    // 2. Check for accessing protected system or user credential paths
-    for (const targetPath of this.protectedPaths) {
-      const escaped = targetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(?:\\b|/|\\s)${escaped}(?:\\b|/|\\s|$)`, 'i');
-      if (regex.test(cmd)) {
-        violations.push({
-          code: 'ERR_PROTECTED_PATH_ACCESS',
-          message: `Attempted access to protected credential/system path: ${targetPath}`,
-          severity: 'critical',
-          matchedRule: targetPath,
-          target: cmd
-        });
+    // 1. Check for destructive command patterns across all deobfuscated forms
+    for (const c of commandsToInspect) {
+      for (const pattern of this.blockedPatterns) {
+        if (pattern.test(c)) {
+          violations.push({
+            code: 'ERR_DANGEROUS_COMMAND',
+            message: `Command matches high-risk destructive signature: ${pattern.toString()}`,
+            severity: 'critical',
+            matchedRule: pattern.toString(),
+            target: c
+          });
+        }
+      }
+
+      // 2. Check for accessing protected system or user credential paths
+      for (const targetPath of this.protectedPaths) {
+        const escaped = targetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(?:\\b|/|\\s)${escaped}(?:\\b|/|\\s|$)`, 'i');
+        if (regex.test(c)) {
+          violations.push({
+            code: 'ERR_PROTECTED_PATH_ACCESS',
+            message: `Attempted access to protected credential/system path: ${targetPath}`,
+            severity: 'critical',
+            matchedRule: targetPath,
+            target: c
+          });
+        }
       }
     }
 

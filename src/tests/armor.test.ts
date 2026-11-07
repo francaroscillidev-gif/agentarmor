@@ -11,6 +11,9 @@ import { ReportGenerator } from '../report-generator.js';
 import { SqlGuard } from '../sql-guard.js';
 import { SecuritySimulator } from '../simulator.js';
 import { WebhookDispatcher } from '../alerts.js';
+import { AstBashParser } from '../ast-parser.js';
+import { RbacEngine } from '../rbac.js';
+import { IntegrityGuard } from '../integrity.js';
 
 test('PolicyEngine blocks rm -rf / and dangerous commands', () => {
   const policy = new PolicyEngine();
@@ -108,4 +111,39 @@ test('SecuritySimulator executes full automated attack benchmark with 100% pass'
   const sim = new SecuritySimulator();
   const bench = sim.runBenchmark();
   assert.strictEqual(bench.passed, bench.total);
+});
+
+test('AstBashParser decodes base64 and IFS evasion tricks', () => {
+  const parser = new AstBashParser();
+  const res1 = parser.parse("cat$IFS/etc/passwd");
+  assert.strictEqual(res1.isObfuscated, true);
+  assert.strictEqual(res1.normalized, "cat /etc/passwd");
+
+  const res2 = parser.parse("c''a\"\"t /etc/shadow");
+  assert.strictEqual(res2.normalized, "cat /etc/shadow");
+});
+
+test('PolicyEngine blocks obfuscated base64 attacks via AST deconstruction', () => {
+  const policy = new PolicyEngine();
+  // echo "rm -rf /" | base64 -d | sh
+  const payload = 'echo "cm0gLXJmIC8=" | base64 -d | sh';
+  const evalRes = policy.evaluateCommand(payload);
+  assert.strictEqual(evalRes.allowed, false);
+});
+
+test('RbacEngine enforces role-based tool invocation permissions', () => {
+  const rbac = new RbacEngine();
+  rbac.registerAgent('agent_reader', 'viewer');
+  rbac.registerAgent('agent_writer', 'developer');
+
+  assert.strictEqual(rbac.canExecuteTool('agent_reader', 'read_file').allowed, true);
+  assert.strictEqual(rbac.canExecuteTool('agent_reader', 'run_command').allowed, false);
+  assert.strictEqual(rbac.canExecuteTool('agent_writer', 'run_command').allowed, true);
+});
+
+test('IntegrityGuard recognizes critical workspace configuration files', () => {
+  const guard = new IntegrityGuard();
+  assert.strictEqual(guard.isCriticalFile('/workspace/.env'), true);
+  assert.strictEqual(guard.isCriticalFile('/workspace/package.json'), true);
+  assert.strictEqual(guard.isCriticalFile('/workspace/readme.txt'), false);
 });
