@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="AgentArmor Logo" width="160" height="160" />
+</p>
+
 # AgentArmor 🛡️
 
 **The Zero-Trust Security Gateway & Deterministic Sandbox for AI Agents & MCP Tools.**

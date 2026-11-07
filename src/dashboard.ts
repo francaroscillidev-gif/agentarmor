@@ -64,8 +64,12 @@ export function startDashboardServer(port: number = 3456): http.Server {
   <div class="max-w-6xl mx-auto px-4 py-8">
     <!-- Header -->
     <header class="flex items-center justify-between pb-6 border-b border-slate-800">
-      <div class="flex items-center space-x-3">
-        <span class="text-3xl">🛡️</span>
+      <div class="flex items-center space-x-4">
+        <svg class="w-12 h-12" viewBox="0 0 512 512" fill="none">
+          <path d="M 256,80 C 336,80 406,118 406,196 C 406,306 294,388 256,420 C 218,388 106,306 106,196 C 106,118 176,80 256,80 Z" fill="#1e1b4b" stroke="#38bdf8" stroke-width="12" />
+          <polygon points="256,198 292,218 292,258 256,278 220,258 220,218" fill="#090d16" stroke="#818cf8" stroke-width="8" />
+          <circle cx="256" cy="238" r="10" fill="#38bdf8" />
+        </svg>
         <div>
           <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-teal-400 bg-clip-text text-transparent">AgentArmor Dashboard</h1>
           <p class="text-sm text-slate-400">Zero-Trust AI Gateway & Sandbox Runtime</p>
