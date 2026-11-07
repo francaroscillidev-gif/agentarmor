@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Deep Cosmic Obsidian Canvas Background -->
+    <radialGradient id="canvasBg" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#0d1527" />
+      <stop offset="45%" stop-color="#070b14" />
+      <stop offset="100%" stop-color="#020408" />
+    </radialGradient>
+
+    <!-- App Squircle Bevel Gradient -->
+    <linearGradient id="squircleBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="35%" stop-color="#6366f1" stop-opacity="0.3" />
+      <stop offset="70%" stop-color="#1e1b4b" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.7" />
+    </linearGradient>
+
+    <!-- Primary Shield Rim Metallic Gradient -->
+    <linearGradient id="shieldRim" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#7dd3fc" />
+      <stop offset="25%" stop-color="#38bdf8" />
+      <stop offset="55%" stop-color="#6366f1" />
+      <stop offset="85%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <!-- Inner Shield Carbon Armor Plating -->
+    <linearGradient id="armorPlate" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e38" />
+      <stop offset="40%" stop-color="#0f1123" />
+      <stop offset="100%" stop-color="#05070f" />
+    </linearGradient>
+
+    <!-- Core Plasma Arc (Quantum AI Core) -->
+    <radialGradient id="quantumGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="20%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.9" />
+      <stop offset="75%" stop-color="#4338ca" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Crystal Prism Shards Gradient -->
+    <linearGradient id="prismLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.3" />
+    </linearGradient>
+    <linearGradient id="prismRight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Glow & Shadow Filters -->
+    <filter id="bloomSoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="24" result="blur1" />
+      <feGaussianBlur stdDeviation="12" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="bloomIntense" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="36" result="blurWide" />
+      <feGaussianBlur stdDeviation="14" result="blurTight" />
+      <feMerge>
+        <feMergeNode in="blurWide" />
+        <feMergeNode in="blurTight" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="dropShadowShield" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="28" stdDeviation="36" flood-color="#000000" flood-opacity="0.85" />
+      <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#38bdf8" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- iOS / macOS Squircle Background Base -->
+  <rect x="16" y="16" width="992" height="992" rx="224" fill="url(#canvasBg)" />
+  <rect x="20" y="20" width="984" height="984" rx="220" fill="none" stroke="url(#squircleBorder)" stroke-width="4" stroke-opacity="0.7" />
+
+  <!-- Ambient Digital Hex Matrix Watermark (Subtle) -->
+  <g opacity="0.08" stroke="#38bdf8" stroke-width="2" fill="none">
+    <path d="M 512,140 L 580,180 L 580,260 L 512,300 L 444,260 L 444,180 Z" />
+    <path d="M 330,240 L 398,280 L 398,360 L 330,400 L 262,360 L 262,280 Z" />
+    <path d="M 694,240 L 762,280 L 762,360 L 694,400 L 626,360 L 626,280 Z" />
+    <path d="M 512,680 L 580,720 L 580,800 L 512,840 L 444,800 L 444,720 Z" />
+  </g>
+
+  <!-- Outer Atmospheric Aura -->
+  <circle cx="512" cy="460" r="280" fill="url(#quantumGlow)" opacity="0.18" filter="url(#bloomSoft)" />
+
+  <!-- MAIN SHIELD CONTAINER WITH DROP SHADOW -->
+  <g filter="url(#dropShadowShield)">
+
+    <!-- Primary Shield Bevel (Outer Thick Cyber Frame) -->
+    <path d="M 512,150
+             C 680,150 830,225 830,380
+             C 830,610 598,775 512,842
+             C 426,775 194,610 194,380
+             C 194,225 344,150 512,150 Z"
+          fill="url(#armorPlate)"
+          stroke="url(#shieldRim)"
+          stroke-width="18"
+          stroke-linejoin="round" />
+
+    <!-- Neon Rim Flare Accent -->
+    <path d="M 512,150
+             C 680,150 830,225 830,380
+             C 830,610 598,775 512,842
+             C 426,775 194,610 194,380
+             C 194,225 344,150 512,150 Z"
+          fill="none"
+          stroke="#7dd3fc"
+          stroke-width="6"
+          stroke-opacity="0.8"
+          filter="url(#bloomSoft)" />
+
+    <!-- Inner Inset Contour (Laser-Etched Circuit Wall) -->
+    <path d="M 512,195
+             C 644,195 765,255 765,385
+             C 765,575 580,715 512,770
+             C 444,770 259,575 259,385
+             C 259,255 380,195 512,195 Z"
+          fill="#060913"
+          stroke="#38bdf8"
+          stroke-width="3"
+          stroke-opacity="0.35"
+          stroke-dasharray="16 8" />
+
+    <!-- Isometric Shield Facets (Chiseled Cyberpunk Armor Segments) -->
+    <!-- Left Flank Facet -->
+    <path d="M 512,195 L 259,385 L 340,430 L 512,320 Z" fill="url(#prismLeft)" opacity="0.4" />
+    <!-- Right Flank Facet -->
+    <path d="M 512,195 L 765,385 L 684,430 L 512,320 Z" fill="url(#prismRight)" opacity="0.4" />
+    <!-- Bottom V-Keel Facet -->
+    <path d="M 512,770 L 370,650 L 512,560 L 654,650 Z" fill="#0c1326" opacity="0.7" stroke="#6366f1" stroke-width="2" stroke-opacity="0.4" />
+
+    <!-- Neural Highway Traces (Glowing Zero-Trust Bus) -->
+    <g stroke="url(#shieldRim)" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.9">
+      <!-- Upper Left Ingress -->
+      <path d="M 330,310 L 400,310 L 445,390" />
+      <!-- Upper Right Ingress -->
+      <path d="M 694,310 L 624,310 L 579,390" />
+      <!-- Lower Left Return -->
+      <path d="M 360,570 L 420,530 L 455,490" />
+      <!-- Lower Right Return -->
+      <path d="M 664,570 L 604,530 L 569,490" />
+      <!-- Central Vertical Data Backbone -->
+      <path d="M 512,230 L 512,350" />
+      <path d="M 512,530 L 512,710" />
+    </g>
+
+    <!-- Synaptic Network Micro-Nodes -->
+    <g fill="#7dd3fc" filter="url(#bloomSoft)">
+      <circle cx="330" cy="310" r="9" />
+      <circle cx="694" cy="310" r="9" />
+      <circle cx="360" cy="570" r="8" />
+      <circle cx="664" cy="570" r="8" />
+      <circle cx="512" cy="710" r="7" />
+    </g>
+    <!-- Node Specular Center Hits -->
+    <g fill="#ffffff">
+      <circle cx="330" cy="310" r="4" />
+      <circle cx="694" cy="310" r="4" />
+      <circle cx="360" cy="570" r="3.5" />
+      <circle cx="664" cy="570" r="3.5" />
+      <circle cx="512" cy="710" r="3" />
+    </g>
+
+    <!-- ZERO-TRUST HORIZON CREST / VAULT SHACKLE -->
+    <path d="M 470,250
+             C 470,227 489,208 512,208
+             C 535,208 554,227 554,250
+             L 554,272 L 470,272 Z"
+          fill="none"
+          stroke="#38bdf8"
+          stroke-width="6.5"
+          stroke-linecap="round"
+          filter="url(#bloomSoft)" />
+
+    <!-- THE QUANTUM AI CORE (CENTRAL GUARDIAN ENGINE) -->
+    <!-- Giant Volumetric Glow Aura Behind Core -->
+    <circle cx="512" cy="440" r="110" fill="url(#quantumGlow)" filter="url(#bloomIntense)" opacity="0.85" />
+
+    <!-- Outer Hexagonal Quantum Accelerator Ring -->
+    <polygon points="512,355 585,397 585,483 512,525 439,483 439,397"
+             fill="#04060d"
+             stroke="url(#shieldRim)"
+             stroke-width="7"
+             filter="url(#bloomSoft)" />
+
+    <!-- Floating Inner Concentric Shards -->
+    <polygon points="512,380 562,408 562,472 512,500 462,472 462,408"
+             fill="none"
+             stroke="#38bdf8"
+             stroke-width="3"
+             stroke-dasharray="12 6"
+             opacity="0.9" />
+
+    <!-- Central Diamond Nexus Core -->
+    <polygon points="512,398 546,440 512,482 478,440"
+             fill="url(#quantumGlow)"
+             stroke="#ffffff"
+             stroke-width="3"
+             filter="url(#bloomSoft)" />
+
+    <!-- Supernova Center Core Core Spark -->
+    <circle cx="512" cy="440" r="14" fill="#ffffff" filter="url(#bloomIntense)" />
+    <circle cx="512" cy="440" r="7" fill="#38bdf8" />
+  </g>
+</svg>
